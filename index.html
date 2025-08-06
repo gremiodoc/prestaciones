@@ -1,3 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calculadora de Prestaciones Sociales - MPPE</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 480px;
+    margin: 30px auto;
+    padding: 0 15px;
+    background: #f9f9f9;
+  }
+  h1 {
+    text-align: left;
+    color: #2c3e50;
+    font-size: 1.3rem;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    margin-top: 5px;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  button:hover {
+    background-color: #1c5980;
+  }
+  .result {
+    margin-top: 25px;
+    background: #d0e7ff;
+    padding: 15px;
+    border-radius: 5px;
+    color: #000;
+  }
+  .totales {
+    margin-top: 20px;
+    background: #003366;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .note {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+    background: #fff3cd;
+    padding: 10px;
+    border-left: 5px solid #ffeeba;
+    border-radius: 3px;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .header img {
+    height: 60px;
+    margin-right: 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Encabezado con logo -->
+<div class="header">
+  <img src="logo_gremio.png" alt="Logo Gremio Docente" />
+  <h1>Calculadora de Prestaciones Sociales - MPPE</h1>
+</div>
+
+<form id="calcForm" onsubmit="return calcularPrestaciones()">
+  <label for="salario">Salario básico mensual (Bs.):</label>
+  <input type="number" id="salario" min="0" step="0.01" required placeholder="Ejemplo: 800" />
+
+  <label for="anios">Años de servicio:</label>
+  <input type="number" id="anios" min="0" step="0.01" required placeholder="Ejemplo: 22" />
+
+  <label>
+    <input type="checkbox" id="docente25" />
+    Soy docente y me jubilo con 25 años (se reconocerán 30 años para el cálculo)
+  </label>
+
+  <label for="dolar">Cotización del dólar BCV (Bs/USD):</label>
+  <input type="number" id="dolar" min="0.0001" step="0.0001" required placeholder="Ejemplo: 113.45" />
+
+  <button type="submit">Calcular prestaciones</button>
+</form>
+
+<div class="note">
+  <strong>Aclaratoria:</strong><br>
+  - Si eres docente y te jubilas con 25 años, la calculadora reconocerá 30 años para el cálculo.<br>
+  - Si tienes menos de 25 años, se usarán esos años exactos.<br>
+  - Esta calculadora solo usa salario básico, sin primas ni otros bonos.
+</div>
+
+<div id="resultado" class="result" style="display:none;"></div>
+
 <script>
 function calcularPrestaciones() {
   const salario = parseFloat(document.getElementById('salario').value);
@@ -21,7 +144,6 @@ function calcularPrestaciones() {
   const totalPrestaciones = totalAportes + liquidacion;
   const totalDolares = totalPrestaciones / dolar;
 
-  // Formato local venezolano
   const formatoBs = n => n.toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const formatoUSD = n => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -34,15 +156,7 @@ function calcularPrestaciones() {
     <p><strong>Total acumulado en aportes trimestrales:</strong> Bs. ${formatoBs(totalAportes)}</p>
     <p><strong>Liquidación (30 días por año):</strong> Bs. ${formatoBs(liquidacion)}</p>
     <div class="totales">
-      <p>Total estimado de prestaciones sociales:<br> Bs. ${formatoBs(totalPrestaciones)}</p>
-      <p>Total estimado en dólares (USD):<br> $ ${formatoUSD(totalDolares)}</p>
-    </div>
-  `;
-
-  return false;
-}
-</script>
-
+      <p>Total estimado de prestacione
 
 
 
