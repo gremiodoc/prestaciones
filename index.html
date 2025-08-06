@@ -27,6 +27,12 @@
     padding: 8px;
     font-size: 1rem;
     margin-top: 5px;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
   input[type="checkbox"] {
     margin-right: 8px;
@@ -46,10 +52,19 @@
   }
   .result {
     margin-top: 25px;
-    background: #dff0d8;
+    background: #d0e7ff;
     padding: 15px;
     border-radius: 5px;
-    color: #3c763d;
+    color: #000;
+  }
+  .totales {
+    margin-top: 20px;
+    background: #003366;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-weight: bold;
   }
   .note {
     font-size: 0.9rem;
@@ -142,8 +157,10 @@ function calcularPrestaciones() {
     <p><strong>Total de trimestres reconocidos:</strong> ${trimestres.toFixed(2)}</p>
     <p><strong>Total acumulado en aportes trimestrales:</strong> Bs. ${totalAportes.toFixed(2)}</p>
     <p><strong>Liquidación (30 días por año):</strong> Bs. ${liquidacion.toFixed(2)}</p>
-    <p><strong>Total estimado de prestaciones sociales:</strong> Bs. ${totalPrestaciones.toFixed(2)}</p>
-    <p><strong>Total estimado en dólares (USD):</strong> $ ${totalDolares.toFixed(2)}</p>
+    <div class="totales">
+      <p>Total estimado de prestaciones sociales:<br> Bs. ${totalPrestaciones.toFixed(2)}</p>
+      <p>Total estimado en dólares (USD):<br> $ ${totalDolares.toFixed(2)}</p>
+    </div>
   `;
 
   return false; // evita que se recargue la página
@@ -152,3 +169,5 @@ function calcularPrestaciones() {
 
 </body>
 </html>
+
+
